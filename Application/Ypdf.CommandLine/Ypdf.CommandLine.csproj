@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../Core/Ypdf.Core/Ypdf.Core.csproj" />
+    <ProjectReference Include="../../Core/Ypdf.Core/Core/Ypdf.Core/Ypdf.Core.csproj" />
   </ItemGroup>
 
   <Import Project="Ypdf.CommandLine.targets" />
