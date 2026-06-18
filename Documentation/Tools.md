@@ -385,6 +385,17 @@ ypdf text-to-pdf -i /path/to/input.txt -o /path/to/output.pdf \
     --font-opacity 0.5 \
 ```
 
+## Convert PDF Document Pages To Images
+You can convert PDF document pages to images. Please note that Python 3 must be installed on your system to execute this tool. If no pages are specified, all pages of the PDF document will be converted.
+```bash
+ypdf render -i /path/to/input.pdf -o /path/to/output/directory -p 1 3
+```
+
+You can also specify output images DPI and extension.
+```bash
+ypdf render -i /path/to/input.pdf -o /path/to/output/directory --dpi 300 --extension jpg
+```
+
 ## Extract Images From PDF Document
 You can extract images from a PDF document. Please note that Python 3 must be installed on your system to execute this tool.
 ```bash
