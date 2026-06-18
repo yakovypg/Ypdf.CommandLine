@@ -12,6 +12,7 @@ internal sealed class ExtractTextSubcommand
     internal const string OutputPathLongName = "output";
     internal const string TextExtractorLongName = "text-extractor";
     internal const string UseTikaLongName = "use-tika";
+    internal const string TikaServerJarPathLongName = "tika-jar";
 
     internal const string DefaultTextExtractor = nameof(TextExtractors.Simple);
 
@@ -56,4 +57,13 @@ internal sealed class ExtractTextSubcommand
     ]
     [OptionGroup("extraction", "", "")]
     public bool UseTika { get; set; }
+
+    [ValueOption<string>(
+        longName: TikaServerJarPathLongName,
+        shortName: "j",
+        description: "path to the tika server .jar file",
+        valueRestriction: "file jar\n?input path must point to a .jar file")
+    ]
+    [OptionGroup("extraction", "", "")]
+    public string TikaServerJarPath { get; set; } = string.Empty;
 }

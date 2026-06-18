@@ -24,8 +24,12 @@ internal sealed class ExtractTextToolCreator : ToolCreator
         IOutputWriter outputWriter = Config.OutputWriter;
 
         ITool tool = subcommand.UseTika
-            ? new PdfToTextTool(pythonAlias, virtualEnvironmentPath, outputWriter)
-            : new PdfToTextSimpleTool(subcommand.TextExtractor);
+            ? new ExtractTextTool(
+                subcommand.TikaServerJarPath,
+                pythonAlias,
+                virtualEnvironmentPath,
+                outputWriter)
+            : new ExtractTextSimpleTool(subcommand.TextExtractor);
 
         ToolExecutionParameters toolExecutionParameters = new(
             tool,
