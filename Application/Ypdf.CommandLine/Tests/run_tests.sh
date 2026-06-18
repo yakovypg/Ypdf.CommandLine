@@ -14,6 +14,8 @@ INPUT_DIR="$SCRIPT_DIR/Input"
 OUTPUT_DIR="$SCRIPT_DIR/Output"
 
 CUSTOM_FONT_PATH="$SCRIPT_DIR/Input/Roboto-Bold.ttf"
+TIKA_SERVER_JAR_PATH="$SCRIPT_DIR/Input/tika-server-standard-3.1.0.jar"
+TIKA_SERVER_JAR_CHECKSUM_PATH="$TIKA_SERVER_JAR_PATH.md5"
 
 HELP_OUTPUT="$OUTPUT_DIR/help.txt"
 TOOL_HELP_OUTPUT="$OUTPUT_DIR/tool_help.txt"
@@ -135,8 +137,10 @@ EXTRACT_IMAGES_OUTPUT="$OUTPUT_DIR/extract_images"
 
 EXTRACT_TEXT_DEFAULT_INPUT="$INPUT_DIR/pdf_with_images_and_text.pdf"
 EXTRACT_TEXT_DEFAULT_OUTPUT="$OUTPUT_DIR/extract_text_default.txt"
-EXTRACT_TEXT_WITH_TIKA_INPUT="$INPUT_DIR/pdf_with_images_and_text.pdf"
-EXTRACT_TEXT_WITH_TIKA_OUTPUT="$OUTPUT_DIR/extract_text_with_tika.txt"
+EXTRACT_TEXT_WITH_TIKA_REMOTE_JAR_INPUT="$INPUT_DIR/pdf_with_images_and_text.pdf"
+EXTRACT_TEXT_WITH_TIKA_REMOTE_JAR_OUTPUT="$OUTPUT_DIR/extract_text_with_tika_remote_jar.txt"
+EXTRACT_TEXT_WITH_TIKA_LOCAL_JAR_INPUT="$INPUT_DIR/pdf_with_images_and_text.pdf"
+EXTRACT_TEXT_WITH_TIKA_LOCAL_JAR_OUTPUT="$OUTPUT_DIR/extract_text_with_tika_local_jar.txt"
 
 SET_PASSWORD_SAME_INPUT="$INPUT_DIR/pdf_5pages_blue.pdf"
 SET_PASSWORD_SAME_OUTPUT="$OUTPUT_DIR/set_password_same.pdf"
@@ -822,11 +826,24 @@ test_extract_text_default() {
   return 0
 }
 
-test_extract_text_with_tika() {
+test_extract_text_with_tika_remote_jar() {
   if ! "$EXECUTABLE" -y extract-text \
-  -i "$EXTRACT_TEXT_WITH_TIKA_INPUT" \
-  -o "$EXTRACT_TEXT_WITH_TIKA_OUTPUT" \
+  -i "$EXTRACT_TEXT_WITH_TIKA_REMOTE_JAR_INPUT" \
+  -o "$EXTRACT_TEXT_WITH_TIKA_REMOTE_JAR_OUTPUT" \
   --use-tika; then
+
+    return 1
+  fi
+
+  return 0
+}
+
+test_extract_text_with_tika_local_jar() {
+  if ! "$EXECUTABLE" -y extract-text \
+  -i "$EXTRACT_TEXT_WITH_TIKA_LOCAL_JAR_INPUT" \
+  -o "$EXTRACT_TEXT_WITH_TIKA_LOCAL_JAR_OUTPUT" \
+  --use-tika \
+  --tika-jar "$TIKA_SERVER_JAR_PATH"; then
 
     return 1
   fi
@@ -1061,7 +1078,8 @@ TEST_FUNCTIONS=(
   test_text_to_pdf_with_custom_font
   test_extract_images
   test_extract_text_default
-  test_extract_text_with_tika
+  test_extract_text_with_tika_remote_jar
+  test_extract_text_with_tika_local_jar
   test_set_password_same
   test_set_password_separate
   test_set_password_with_encryption
