@@ -132,6 +132,11 @@ TEXT_TO_PDF_WITH_FONT_OUTPUT="$OUTPUT_DIR/text_to_pdf_with_font.pdf"
 TEXT_TO_PDF_WITH_CUSTOM_FONT_INPUT="$INPUT_DIR/text_multi.txt"
 TEXT_TO_PDF_WITH_CUSTOM_FONT_OUTPUT="$OUTPUT_DIR/text_to_pdf_with_custom_font.pdf"
 
+RENDER_DEFAULT_INPUT="$INPUT_DIR/pdf_with_images_and_text.pdf"
+RENDER_DEFAULT_OUTPUT="$OUTPUT_DIR/render_default"
+RENDER_CUSTOM_INPUT="$INPUT_DIR/pdf_with_images_and_text.pdf"
+RENDER_CUSTOM_OUTPUT="$OUTPUT_DIR/render_custom"
+
 EXTRACT_IMAGES_INPUT="$INPUT_DIR/pdf_with_images_and_text.pdf"
 EXTRACT_IMAGES_OUTPUT="$OUTPUT_DIR/extract_images"
 
@@ -804,6 +809,31 @@ test_text_to_pdf_with_custom_font() {
   return 0
 }
 
+test_render_default() {
+  if ! "$EXECUTABLE" -y render \
+    -i "$RENDER_DEFAULT_INPUT" \
+    -o "$RENDER_DEFAULT_OUTPUT" \
+    -p 1 3; then
+
+    return 1
+  fi
+
+  return 0
+}
+
+test_render_custom() {
+  if ! "$EXECUTABLE" -y render \
+    -i "$RENDER_CUSTOM_INPUT" \
+    -o "$RENDER_CUSTOM_OUTPUT" \
+    --dpi 300 \
+    --extension jpg; then
+
+    return 1
+  fi
+
+  return 0
+}
+
 test_extract_images() {
   if ! "$EXECUTABLE" -y extract-images \
     -i "$EXTRACT_IMAGES_INPUT" \
@@ -1076,6 +1106,8 @@ TEST_FUNCTIONS=(
   test_text_to_pdf_custom
   test_text_to_pdf_with_font
   test_text_to_pdf_with_custom_font
+  test_render_default
+  test_render_custom
   test_extract_images
   test_extract_text_default
   test_extract_text_with_tika_remote_jar
