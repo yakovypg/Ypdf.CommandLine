@@ -64,6 +64,31 @@ internal abstract class OptionRestrictions : OptionRestrictionProvider
         return divisions => divisions.All(t => correctPredicate(t));
     }
 
+    protected static Predicate<PageResizing> CreatePageResizingCorrectPredicate(
+        int minPage = 1,
+        float minWidth = 1,
+        float minHeight = 1)
+    {
+        return t =>
+            t.PageNumber >= minPage &&
+            t.Width >= minWidth &&
+            t.Height >= minHeight;
+    }
+
+    protected static Predicate<T> CreateAllPageResizingsCorrectPredicate<T>(
+        int minPage = 1,
+        float minWidth = 1,
+        float minHeight = 1)
+        where T : IEnumerable<PageResizing>
+    {
+        Predicate<PageResizing> correctPredicate = CreatePageResizingCorrectPredicate(
+            minPage,
+            minWidth,
+            minHeight);
+
+        return reseizings => reseizings.All(t => correctPredicate(t));
+    }
+
     protected static Predicate<PageOrder> CreatePageOrderCorrectPredicate(int minPage = 1)
     {
         return pageOrder => pageOrder.Pages.All(t => t >= minPage);
@@ -187,6 +212,30 @@ internal abstract class OptionRestrictions : OptionRestrictionProvider
             parserQuantum,
             optionLongName,
             CreateAllPageDivisionsCorrectPredicate<T>(minPage),
+            badValueMessage);
+    }
+
+    protected static void AddRestrictionForPageResizingEnumerableOption<T>(
+        ParserQuantum parserQuantum,
+        string optionLongName,
+        int minPage = 1,
+        float minWidth = 1,
+        float minHeight = 1)
+        where T : IEnumerable<PageResizing>
+    {
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
+        ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
+
+        string badValueReason = $"all pages must be >= {minPage}, " +
+            $"Width of all pages must be >= {minWidth}, " +
+            $"Height of all pages must be >= {minHeight}";
+
+        string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
+
+        AddRestriction(
+            parserQuantum,
+            optionLongName,
+            CreateAllPageResizingsCorrectPredicate<T>(minPage, minWidth, minHeight),
             badValueMessage);
     }
 

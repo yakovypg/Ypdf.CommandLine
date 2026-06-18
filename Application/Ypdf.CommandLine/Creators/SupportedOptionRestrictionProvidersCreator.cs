@@ -32,6 +32,7 @@ internal sealed class SupportedOptionRestrictionProvidersCreator : ISupportedOpt
             { RemoveWatermarkAnnotationSubcommand.Name, new RemoveWatermarkAnnotationSubcommandOptionRestrictions() },
             { RenderSubcommand.Name, new RenderSubcommandOptionRestrictions() },
             { ReorderPagesSubcommand.Name, new ReorderPagesSubcommandOptionRestrictions() },
+            { ResizePagesSubcommand.Name, new ResizePagesSubcommandOptionResctrictions() },
             { RotatePagesSubcommand.Name, new RotatePagesSubcommandOptionRestrictions() },
             { SetPasswordSubcommand.Name, new SetPasswordSubcommandOptionRestrictions() },
             { SplitSubcommand.Name, new SplitSubcommandOptionRestrictions() },
