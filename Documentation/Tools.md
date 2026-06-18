@@ -397,9 +397,14 @@ You can extract text from a PDF document.
 ypdf extract-text -i /path/to/input.pdf -o /path/to/output.txt
 ```
 
-You can also use Tika for text extraction. In this case Python 3 must be installed on your system.
+You can also use Tika for text extraction. In this case Python 3 and Java 11+ must be installed on your system.
 ```bash
 ypdf extract-text -i /path/to/input.pdf -o /path/to/output.txt --use-tika
+```
+
+By default the Tika server will be downloaded automatically to a temporary directory (an internet connection is required). To avoid downloading, run a local Tika server from its .jar file. For example, you can download the jar ([tika-server-standard-3.1.0.jar](https://search.maven.org/remotecontent?filepath=org/apache/tika/tika-server-standard/3.1.0/tika-server-standard-3.1.0.jar)) and its checksum ([tika-server-standard-3.1.0.jar.md5](https://repo1.maven.org/maven2/org/apache/tika/tika-server-standard/3.1.0/tika-server-standard-3.1.0.jar.md5)), then specify the jar path. The checksum path is generated automatically by appending `.md5` to the specified jar path.
+```bash
+ypdf extract-text -i /path/to/input.pdf -o /path/to/output.txt --use-tika --tika-jar /path/to/jar.jar
 ```
 
 ## Set Password To PDF Document
