@@ -23,7 +23,7 @@ internal sealed class ExtractImagesToolCreator : ToolCreator
         string virtualEnvironmentPath = Config.VirtualEnvironmentPath;
         IOutputWriter outputWriter = Config.OutputWriter;
 
-        PdfToImageTool tool = new(
+        ExtractImagesTool tool = new(
             subcommand.MaxNumberOfImagesToExtract,
             pythonAlias,
             virtualEnvironmentPath,
