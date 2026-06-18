@@ -71,6 +71,9 @@ internal sealed class YpdfParserConfig
     [Subcommand(RemoveWatermarkAnnotationSubcommand.Name, RemoveWatermarkAnnotationSubcommand.Description)]
     public RemoveWatermarkAnnotationSubcommand RemoveWatermarkAnnotationSubcommand { get; } = new();
 
+    [Subcommand(RenderSubcommand.Name, RenderSubcommand.Description)]
+    public RenderSubcommand RenderSubcommand { get; } = new();
+
     [Subcommand(ReorderPagesSubcommand.Name, ReorderPagesSubcommand.Description)]
     public ReorderPagesSubcommand ReorderPagesSubcommand { get; } = new();
 

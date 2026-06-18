@@ -33,6 +33,7 @@ internal sealed class SupportedToolsCreator : ISupportedToolsCreator
             { RemovePagesSubcommand.Name, new RemovePageToolCreator(globalConfig) },
             { RemovePasswordSubcommand.Name, new RemovePasswordToolCreator(globalConfig) },
             { RemoveWatermarkAnnotationSubcommand.Name, new RemoveWatermarkAnnotationToolCreator(globalConfig) },
+            { RenderSubcommand.Name, new RenderToolCreator(globalConfig) },
             { ReorderPagesSubcommand.Name, new ReorderPagesToolCreator(globalConfig) },
             { ResizePagesSubcommand.Name, new ResizePagesToolCreator(globalConfig) },
             { RotatePagesSubcommand.Name, new RotatePagesToolCreator(globalConfig) },
