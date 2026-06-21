@@ -1,0 +1,12 @@
+name: ypdf-command-line
+
+services:
+  ypdf-command-line:
+    build:
+      context: ../../
+      dockerfile: ./Dockerfile
+    container_name: Ypdf.CommandLine
+    image: ypdf-command-line:latest
+    volumes:
+      - ${INPUT_DIR}:/input:ro
+      - ${OUTPUT_DIR}:/output
