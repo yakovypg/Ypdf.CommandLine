@@ -22,6 +22,10 @@ dotnet_diagnostic.IDE0290.severity = none
 [*.cs]
 dotnet_diagnostic.CA1031.severity = none
 
+# CA1064: Exceptions should be public
+[*.cs]
+dotnet_diagnostic.CA1064.severity = none
+
 # CA1510: Use ArgumentNullException throw helper
 [*.cs]
 dotnet_diagnostic.CA1510.severity = none
