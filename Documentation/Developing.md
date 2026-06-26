@@ -1,6 +1,12 @@
 # Developing
 This document provides essential information for continuing development of **Ypdf.CommandLine**.
 
+## Table of contents
+*    [Build From Source](#build-from-source)
+*    [Run Tests](#run-tests)
+*    [Run Application](#run-application)
+*    [Debug Application](#debug-application)
+
 ## Build From Source
 First, update the submodules if you have not done it yet.
 ```bash
@@ -25,6 +31,19 @@ Follow these steps to run the tests (it is assumed that you are in the [Tests](/
 > - Test files have not been provided yet.
 > - Tests execution is only possible on systems that support bash. Universal tests have not been implemented yet.
 
+## Run Application
+You can [run](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-run) the application by executing the following command from the project root.
+```bash
+dotnet run --framework net10.0 --project Application/Ypdf.CommandLine --version
+```
+
+Alternatively, you can [build](#build-from-source) the application and run the generated executable from the `bin` directory.
+```bash
+./Application/Ypdf.CommandLine/bin/Debug/net10.0/ypdf --version
+```
+
+Naturally, in both commands you can change the target framework from `net10.0` to any framework you want.
+
 ## Debug Application
 If you are using VS Code, you can use these files to configure debugging. Do not forget to update `args` as needed.
 - `launch.json`
@@ -37,7 +56,7 @@ If you are using VS Code, you can use these files to configure debugging. Do not
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/Application/Ypdf.CommandLine/bin/Debug/net8.0/ypdf.dll",
+      "program": "${workspaceFolder}/Application/Ypdf.CommandLine/bin/Debug/net10.0/ypdf.dll",
       "args": [
         "-y", "render", "-i", "/path/to/input.pdf", "-o", "/path/to/output/dir"
       ],
@@ -71,5 +90,3 @@ If you are using VS Code, you can use these files to configure debugging. Do not
 }
 
 ```
-
-## Create Package
