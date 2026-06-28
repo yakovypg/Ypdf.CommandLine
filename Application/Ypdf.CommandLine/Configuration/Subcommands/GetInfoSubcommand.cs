@@ -1,18 +1,15 @@
-using System.Collections.Generic;
 using NetArgumentParser.Attributes;
-using NetArgumentParser.Options.Context;
-using Ypdf.Core.Design.Pages;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
-internal sealed class ResizePagesSubcommand
+internal sealed class GetInfoSubcommand
 {
-    internal const string Name = "resize";
-    internal const string Description = "Resize PDF document pages";
+    internal const string Name = "info";
+    internal const string Description = "Get info about the PDF document";
 
     internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
     internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
-    internal const string PageResizingsLongName = "resizing";
+    internal const string MaxPageSizesToPrintLongName = "limit-page-sizes";
 
     [ValueOption<string>(
         longName: InputPathLongName,
@@ -27,18 +24,18 @@ internal sealed class ResizePagesSubcommand
     [ValueOption<string>(
         longName: OutputPathLongName,
         shortName: "o",
-        description: "path to the output file",
-        isRequired: true)
+        description: "path to the output file")
     ]
     [OptionGroup("paths", "", "")]
     public string OutputPath { get; set; } = string.Empty;
 
-    [MultipleValueOption<PageResizing>(
-        longName: PageResizingsLongName,
-        shortName: "r",
-        description: "page resizings (Pages:W,H -> 1:1920,1080 or 1,3-5:500,500)",
-        contextCaptureType: ContextCaptureType.OneOrMore,
-        isRequired: true)
+    [ValueOption<int>(
+        defaultValue: 0,
+        longName: MaxPageSizesToPrintLongName,
+        shortName: "l",
+        description: "maximum number of page sizes that will be printed. Zero indicates no limitation",
+        addDefaultValueToDescription: true,
+        valueRestriction: "min 0\n?maximum number of page sizes must be non-negative")
     ]
-    public List<PageResizing> PageResizings { get; set; } = [];
+    public int MaxPageSizesToPrint { get; set; }
 }

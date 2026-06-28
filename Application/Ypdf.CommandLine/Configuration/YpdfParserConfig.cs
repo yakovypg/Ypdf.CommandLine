@@ -1,4 +1,5 @@
 using NetArgumentParser.Attributes;
+using Ypdf.CommandLine.Configuration.Subcommands;
 
 namespace Ypdf.CommandLine.Configuration;
 

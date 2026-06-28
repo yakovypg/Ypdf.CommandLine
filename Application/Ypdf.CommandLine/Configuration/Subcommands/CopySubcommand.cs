@@ -1,16 +1,14 @@
 using NetArgumentParser.Attributes;
-using Ypdf.Core.Enumeration;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
-internal sealed class ReorderPagesSubcommand
+internal sealed class CopySubcommand
 {
-    internal const string Name = "reorder-pages";
-    internal const string Description = "Reorder PDF document pages";
+    internal const string Name = "copy";
+    internal const string Description = "Copy the PDF document";
 
     internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
     internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
-    internal const string PageOrderLongName = "page-order";
 
     [ValueOption<string>(
         longName: InputPathLongName,
@@ -30,12 +28,4 @@ internal sealed class ReorderPagesSubcommand
     ]
     [OptionGroup("paths", "", "")]
     public string OutputPath { get; set; } = string.Empty;
-
-    [ValueOption<PageOrder>(
-        longName: PageOrderLongName,
-        shortName: "p",
-        description: "order of the pages (enumerable of N or S-E -> 5,3,2,1,4 or 5,3-1,4)",
-        isRequired: true)
-    ]
-    public PageOrder PageOrder { get; set; }
 }

@@ -1,15 +1,16 @@
 using NetArgumentParser.Attributes;
+using Ypdf.Core.Enumeration;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
-internal sealed class GetInfoSubcommand
+internal sealed class ReorderPagesSubcommand
 {
-    internal const string Name = "info";
-    internal const string Description = "Get info about the PDF document";
+    internal const string Name = "reorder-pages";
+    internal const string Description = "Reorder PDF document pages";
 
     internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
     internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
-    internal const string MaxPageSizesToPrintLongName = "limit-page-sizes";
+    internal const string PageOrderLongName = "page-order";
 
     [ValueOption<string>(
         longName: InputPathLongName,
@@ -24,18 +25,17 @@ internal sealed class GetInfoSubcommand
     [ValueOption<string>(
         longName: OutputPathLongName,
         shortName: "o",
-        description: "path to the output file")
+        description: "path to the output file",
+        isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
     public string OutputPath { get; set; } = string.Empty;
 
-    [ValueOption<int>(
-        defaultValue: 0,
-        longName: MaxPageSizesToPrintLongName,
-        shortName: "l",
-        description: "maximum number of page sizes that will be printed. Zero indicates no limitation",
-        addDefaultValueToDescription: true,
-        valueRestriction: "min 0\n?maximum number of page sizes must be non-negative")
+    [ValueOption<PageOrder>(
+        longName: PageOrderLongName,
+        shortName: "p",
+        description: "order of the pages (enumerable of N or S-E -> 5,3,2,1,4 or 5,3-1,4)",
+        isRequired: true)
     ]
-    public int MaxPageSizesToPrint { get; set; }
+    public PageOrder PageOrder { get; set; }
 }

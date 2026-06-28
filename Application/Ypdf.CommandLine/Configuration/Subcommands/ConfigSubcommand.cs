@@ -1,6 +1,6 @@
 using NetArgumentParser.Attributes;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
 internal sealed class ConfigSubcommand
 {

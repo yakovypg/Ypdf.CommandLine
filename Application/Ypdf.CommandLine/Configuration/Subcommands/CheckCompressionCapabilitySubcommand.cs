@@ -1,11 +1,11 @@
 using NetArgumentParser.Attributes;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
-internal sealed class CopySubcommand
+internal sealed class CheckCompressionCapabilitySubcommand
 {
-    internal const string Name = "copy";
-    internal const string Description = "Copy the PDF document";
+    internal const string Name = "can-compress";
+    internal const string Description = "Check if the PDF document can be compressed";
 
     internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
     internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
@@ -21,10 +21,10 @@ internal sealed class CopySubcommand
     public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
+        defaultValue: "",
         longName: OutputPathLongName,
         shortName: "o",
-        description: "path to the output file",
-        isRequired: true)
+        description: "path to the output file [default=\"\"]")
     ]
     [OptionGroup("paths", "", "")]
     public string OutputPath { get; set; } = string.Empty;

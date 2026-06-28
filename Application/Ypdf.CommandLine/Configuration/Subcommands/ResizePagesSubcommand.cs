@@ -1,18 +1,18 @@
 using System.Collections.Generic;
 using NetArgumentParser.Attributes;
 using NetArgumentParser.Options.Context;
-using Ypdf.Core.Enumeration;
+using Ypdf.Core.Design.Pages;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
-internal sealed class RemoveWatermarkAnnotationSubcommand
+internal sealed class ResizePagesSubcommand
 {
-    internal const string Name = "remove-watermark-annotation";
-    internal const string Description = "Remove watermark from the PDF document";
+    internal const string Name = "resize";
+    internal const string Description = "Resize PDF document pages";
 
     internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
     internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
-    internal const string PagesLongName = "pages";
+    internal const string PageResizingsLongName = "resizing";
 
     [ValueOption<string>(
         longName: InputPathLongName,
@@ -33,11 +33,12 @@ internal sealed class RemoveWatermarkAnnotationSubcommand
     [OptionGroup("paths", "", "")]
     public string OutputPath { get; set; } = string.Empty;
 
-    [MultipleValueOption<PageRange>(
-        longName: PagesLongName,
-        shortName: "p",
-        description: "page number or page range (N or S-E -> 1 or 3-5)",
-        contextCaptureType: ContextCaptureType.OneOrMore)
+    [MultipleValueOption<PageResizing>(
+        longName: PageResizingsLongName,
+        shortName: "r",
+        description: "page resizings (Pages:W,H -> 1:1920,1080 or 1,3-5:500,500)",
+        contextCaptureType: ContextCaptureType.OneOrMore,
+        isRequired: true)
     ]
-    public List<PageRange> Pages { get; set; } = [];
+    public List<PageResizing> PageResizings { get; set; } = [];
 }

@@ -1,18 +1,15 @@
-using System.Collections.Generic;
 using NetArgumentParser.Attributes;
-using NetArgumentParser.Options.Context;
-using Ypdf.Core.Design.Pages;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
-internal sealed class DividePagesSubcommand
+internal sealed class ExtractImagesSubcommand
 {
-    internal const string Name = "divide";
-    internal const string Description = "Divide PDF document pages";
+    internal const string Name = "extract-images";
+    internal const string Description = "Extract images from the PDF document";
 
     internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
     internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
-    internal const string PageDivisionsLongName = "division";
+    internal const string MaxNumberOfImagesToExtractLongName = "limit";
 
     [ValueOption<string>(
         longName: InputPathLongName,
@@ -27,18 +24,19 @@ internal sealed class DividePagesSubcommand
     [ValueOption<string>(
         longName: OutputPathLongName,
         shortName: "o",
-        description: "path to the output file",
+        description: "path to the output directory",
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
     public string OutputPath { get; set; } = string.Empty;
 
-    [MultipleValueOption<PageDivision>(
-        longName: PageDivisionsLongName,
-        shortName: "d",
-        description: "page divisions (Pages:Orientation,CenterOffset -> 1:horizontal or 1,3-5:vertical,10)",
-        contextCaptureType: ContextCaptureType.OneOrMore,
-        isRequired: true)
+    [ValueOption<int>(
+        defaultValue: 0,
+        longName: MaxNumberOfImagesToExtractLongName,
+        shortName: "l",
+        description: "maximum number of images that will be extracted. Zero indicates no limitation",
+        addDefaultValueToDescription: true,
+        valueRestriction: "min 0\n?maximum number of images must be non-negative")
     ]
-    public List<PageDivision> PageDivisions { get; set; } = [];
+    public int MaxNumberOfImagesToExtract { get; set; }
 }

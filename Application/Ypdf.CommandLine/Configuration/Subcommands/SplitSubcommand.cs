@@ -4,7 +4,7 @@ using NetArgumentParser.Options.Context;
 using Ypdf.Core.Enumeration;
 using Ypdf.Core.Geometry;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
 internal sealed class SplitSubcommand
 {

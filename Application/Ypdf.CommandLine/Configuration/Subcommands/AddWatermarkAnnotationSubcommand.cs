@@ -2,20 +2,18 @@ using System.Collections.Generic;
 using iText.IO.Font;
 using iText.IO.Font.Constants;
 using iText.Kernel.Colors;
-using iText.Layout.Properties;
 using NetArgumentParser.Attributes;
 using NetArgumentParser.Options.Context;
 using Ypdf.CommandLine.Converters;
-using Ypdf.Core.Design.Borders;
 using Ypdf.Core.Enumeration;
 using Ypdf.Core.Geometry;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
-internal sealed class AddWatermarkSubcommand
+internal sealed class AddWatermarkAnnotationSubcommand
 {
-    internal const string Name = "add-watermark";
-    internal const string Description = "Add watermark to the PDF document";
+    internal const string Name = "add-watermark-annotation";
+    internal const string Description = "Add watermark annotation to the PDF document";
 
     internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
     internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
@@ -25,13 +23,8 @@ internal sealed class AddWatermarkSubcommand
     internal const string WidthLongName = "width";
     internal const string HeightLongName = "height";
     internal const string LowerLeftPointLongName = "position";
-    internal const string TextAlignmentLongName = "text-alignment";
-    internal const string TextHorizontalAlignmentLongName = "text-h-alignment";
-    internal const string TextContainerVerticalAlignmentLongName = "container-v-alignment";
-    internal const string BorderTypeLongName = "border";
-    internal const string BorderOpacityLongName = "border-opacity";
-    internal const string BorderThicknessLongName = "border-thickness";
-    internal const string BorderColorLongName = "border-color";
+    internal const string XTranslationLongName = "x-translation";
+    internal const string YTranslationLongName = "y-translation";
     internal const string FontPathLongName = "font-path";
     internal const string FontEncodingLongName = "font-encoding";
     internal const string FontSizeLongName = "font-size";
@@ -41,7 +34,6 @@ internal sealed class AddWatermarkSubcommand
 
     internal const string DefaultLowerLeftPoint = "(0;0)";
     internal const string DefaultFontColor = nameof(ColorConstants.BLACK);
-    internal const string DefaultBorderColor = nameof(ColorConstants.BLACK);
 
     [ValueOption<string>(
         longName: InputPathLongName,
@@ -74,7 +66,7 @@ internal sealed class AddWatermarkSubcommand
     [ValueOption<string>(
         longName: TextLongName,
         shortName: "t",
-        description: "watermark text",
+        description: "watermark annotation text",
         isRequired: true,
         valueRestriction: "!empty\n?text must not be empty")
     ]
@@ -88,14 +80,14 @@ internal sealed class AddWatermarkSubcommand
         description: "rotation angle in degrees",
         addDefaultValueToDescription: true)
     ]
-    [OptionGroup("appearance", "", "")]
+    [OptionGroup("appearance", "Appearance", "Options for configuring watermark annotation appearance")]
     public int RotationAngleDegrees { get; set; }
 
     [ValueOption<float>(
         defaultValue: 300f,
         longName: WidthLongName,
         shortName: "w",
-        description: "watermark object width",
+        description: "watermark annotation object width",
         addDefaultValueToDescription: true,
         valueRestriction: "inrange 1 100000\n?with must be in [1; 100000]")
     ]
@@ -106,7 +98,7 @@ internal sealed class AddWatermarkSubcommand
         defaultValue: 450f,
         longName: HeightLongName,
         shortName: "H",
-        description: "watermark object height",
+        description: "watermark annotation object height",
         addDefaultValueToDescription: true,
         valueRestriction: "inrange 1 100000\n?height must be in [1; 100000]")
     ]
@@ -116,100 +108,32 @@ internal sealed class AddWatermarkSubcommand
     [ValueOption<FloatPoint>(
         longName: LowerLeftPointLongName,
         shortName: "P",
-        description: $"lower left point of the watermark [default={DefaultLowerLeftPoint}] ((X;Y) -> (100;250))")
+        description: $"lower left point of the watermark annotation [default={DefaultLowerLeftPoint}] ((X;Y) -> (100;250))")
     ]
     [OptionGroup("appearance", "", "")]
     public FloatPoint LowerLeftPoint { get; set; } = FloatPoint.Parse(DefaultLowerLeftPoint);
 
-    [EnumValueOption<TextAlignment>(
-        defaultValue: TextAlignment.LEFT,
-        longName: TextAlignmentLongName,
+    [ValueOption<float>(
+        defaultValue: 50f,
+        longName: XTranslationLongName,
         shortName: "",
-        description: "alignment of the watermark text",
-        addChoicesToDescription: true,
-        addDefaultValueToDescription: true)
+        description: "shift of the origin along the X-axis for the watermark annotation",
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange -100000 100000\n?X-translation must be in [-100000; 100000]")
     ]
     [OptionGroup("appearance", "", "")]
-    public TextAlignment TextAlignment { get; set; }
-
-    [EnumValueOption<HorizontalAlignment>(
-        defaultValue: HorizontalAlignment.LEFT,
-        longName: TextHorizontalAlignmentLongName,
-        shortName: "",
-        description: "horizontal alignment of the watermark text",
-        addChoicesToDescription: true,
-        addDefaultValueToDescription: true)
-    ]
-    [OptionGroup("appearance", "", "")]
-    public HorizontalAlignment TextHorizontalAlignment { get; set; }
-
-    [EnumValueOption<VerticalAlignment>(
-        defaultValue: VerticalAlignment.BOTTOM,
-        longName: TextContainerVerticalAlignmentLongName,
-        shortName: "",
-        description: "vertical alignment of the watermark text container",
-        addChoicesToDescription: true,
-        addDefaultValueToDescription: true)
-    ]
-    [OptionGroup("appearance", "", "")]
-    public VerticalAlignment TextContainerVerticalAlignment { get; set; }
-
-    [EnumValueOption<BorderType>(
-        longName: BorderTypeLongName,
-        shortName: "",
-        description: "border type [default=null]",
-        addChoicesToDescription: true)
-    ]
-    [OptionGroup("border", "Border", "Options for configuring watermark border")]
-    public BorderType? BorderType { get; set; }
+    public float XTranslation { get; set; }
 
     [ValueOption<float>(
-        defaultValue: 1f,
-        longName: BorderOpacityLongName,
+        defaultValue: 25f,
+        longName: YTranslationLongName,
         shortName: "",
-        description: "border opacity",
+        description: "shift of the origin along the Y-axis for the watermark annotation",
         addDefaultValueToDescription: true,
-        valueRestriction: "inrange 0 1\n?border opacity must be in [0; 1]")
+        valueRestriction: "inrange -100000 100000\n?Y-translation must be in [-100000; 100000]")
     ]
-    [OptionGroup("border", "", "")]
-    public float BorderOpacity { get; set; }
-
-    [ValueOption<float>(
-        defaultValue: 5f,
-        longName: BorderThicknessLongName,
-        shortName: "",
-        description: "border thickness",
-        addDefaultValueToDescription: true,
-        valueRestriction: "inrange 1 100000\n?border thickness must be in [1; 100000]")
-    ]
-    [OptionGroup("border", "", "")]
-    public float BorderThickness { get; set; }
-
-    [ValueOption<Color>(
-        longName: BorderColorLongName,
-        shortName: "",
-        description: $"border color [default={DefaultBorderColor}] (name or (r,g,b))",
-        addBeforeParseChoicesToDescription: true,
-        ignoreCaseInChoices: true,
-        beforeParseChoices:
-        [
-            nameof(ColorConstants.BLACK),
-            nameof(ColorConstants.BLUE),
-            nameof(ColorConstants.CYAN),
-            nameof(ColorConstants.DARK_GRAY),
-            nameof(ColorConstants.GRAY),
-            nameof(ColorConstants.GREEN),
-            nameof(ColorConstants.LIGHT_GRAY),
-            nameof(ColorConstants.MAGENTA),
-            nameof(ColorConstants.ORANGE),
-            nameof(ColorConstants.PINK),
-            nameof(ColorConstants.RED),
-            nameof(ColorConstants.WHITE),
-            nameof(ColorConstants.YELLOW)
-        ])
-    ]
-    [OptionGroup("border", "", "")]
-    public Color BorderColor { get; set; } = ColorConverter.Parse(DefaultBorderColor);
+    [OptionGroup("appearance", "", "")]
+    public float YTranslation { get; set; }
 
     [ValueOption<string>(
         defaultValue: "",
@@ -218,9 +142,9 @@ internal sealed class AddWatermarkSubcommand
         description: "font path [default=\"\"]",
         valueRestriction: "file ttf\n|| empty\n?font path must point to a .ttf file")
     ]
-    [OptionGroup("font", "Font", "Options for configuring font")]
+    [OptionGroup("font", "Font", "Options for configuring watermark annotation font")]
     [MutuallyExclusiveOptionGroup(
-        $"{nameof(AddWatermarkSubcommand)}.{nameof(FontPath)}-{nameof(FontFamily)}",
+        $"{nameof(AddWatermarkAnnotationSubcommand)}.{nameof(FontPath)}-{nameof(FontFamily)}",
         "Font Path",
         $"{nameof(FontPath)} cannot be used with the {nameof(FontFamily)}")
     ]
@@ -305,7 +229,7 @@ internal sealed class AddWatermarkSubcommand
     ]
     [OptionGroup("font", "", "")]
     [MutuallyExclusiveOptionGroup(
-        $"{nameof(AddWatermarkSubcommand)}.{nameof(FontPath)}-{nameof(FontFamily)}",
+        $"{nameof(AddWatermarkAnnotationSubcommand)}.{nameof(FontPath)}-{nameof(FontFamily)}",
         "",
         "")
     ]

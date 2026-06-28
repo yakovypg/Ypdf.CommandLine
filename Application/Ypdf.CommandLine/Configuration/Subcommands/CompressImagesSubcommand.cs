@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using NetArgumentParser.Attributes;
 using NetArgumentParser.Options.Context;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
 internal sealed class CompressImagesSubcommand
 {

@@ -7,7 +7,7 @@ using NetArgumentParser.Attributes;
 using Ypdf.CommandLine.Converters;
 using Ypdf.Core.Design;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
 internal sealed class TextToPdfSubcommand
 {

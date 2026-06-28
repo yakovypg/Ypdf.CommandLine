@@ -3,18 +3,16 @@ using NetArgumentParser.Attributes;
 using NetArgumentParser.Options.Context;
 using Ypdf.Core.Enumeration;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
-internal sealed class RenderSubcommand
+internal sealed class RemoveWatermarkAnnotationSubcommand
 {
-    internal const string Name = "render";
-    internal const string Description = "Convert PDF document pages to images";
+    internal const string Name = "remove-watermark-annotation";
+    internal const string Description = "Remove watermark from the PDF document";
 
     internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
     internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
     internal const string PagesLongName = "pages";
-    internal const string ExtensionLongName = "extension";
-    internal const string DpiLongName = "dpi";
 
     [ValueOption<string>(
         longName: InputPathLongName,
@@ -42,26 +40,4 @@ internal sealed class RenderSubcommand
         contextCaptureType: ContextCaptureType.OneOrMore)
     ]
     public List<PageRange> Pages { get; set; } = [];
-
-    [ValueOption<string>(
-        defaultValue: "jpg",
-        longName: ExtensionLongName,
-        shortName: "e",
-        description: "output images extension",
-        choices: ["jpg", "jpeg", "png", "bmp", "gif", "tiff"],
-        ignoreCaseInChoices: true,
-        addDefaultValueToDescription: true,
-        addChoicesToDescription: true)
-    ]
-    public string Extension { get; set; } = string.Empty;
-
-    [ValueOption<int>(
-        defaultValue: 150,
-        longName: DpiLongName,
-        shortName: "d",
-        description: "output images DPI",
-        addDefaultValueToDescription: true,
-        valueRestriction: "min 1\n?DPI must be >= 1")
-    ]
-    public int Dpi { get; set; }
 }

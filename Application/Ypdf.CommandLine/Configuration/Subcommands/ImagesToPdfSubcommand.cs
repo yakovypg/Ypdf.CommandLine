@@ -5,7 +5,7 @@ using NetArgumentParser.Attributes;
 using NetArgumentParser.Options.Context;
 using Ypdf.Core.Design;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
 internal sealed class ImagesToPdfSubcommand
 {

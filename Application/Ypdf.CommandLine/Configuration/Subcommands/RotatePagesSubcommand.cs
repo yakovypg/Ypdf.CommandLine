@@ -3,7 +3,7 @@ using NetArgumentParser.Attributes;
 using NetArgumentParser.Options.Context;
 using Ypdf.Core.Design.Pages;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
 internal sealed class RotatePagesSubcommand
 {

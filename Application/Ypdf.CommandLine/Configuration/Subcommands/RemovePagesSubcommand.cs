@@ -1,14 +1,18 @@
+using System.Collections.Generic;
 using NetArgumentParser.Attributes;
+using NetArgumentParser.Options.Context;
+using Ypdf.Core.Enumeration;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
-internal sealed class CheckCompressionCapabilitySubcommand
+internal sealed class RemovePagesSubcommand
 {
-    internal const string Name = "can-compress";
-    internal const string Description = "Check if the PDF document can be compressed";
+    internal const string Name = "remove-pages";
+    internal const string Description = "Remove pages from the PDF document";
 
     internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
     internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
+    internal const string PagesLongName = "pages";
 
     [ValueOption<string>(
         longName: InputPathLongName,
@@ -21,11 +25,20 @@ internal sealed class CheckCompressionCapabilitySubcommand
     public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
-        defaultValue: "",
         longName: OutputPathLongName,
         shortName: "o",
-        description: "path to the output file [default=\"\"]")
+        description: "path to the output file",
+        isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
     public string OutputPath { get; set; } = string.Empty;
+
+    [MultipleValueOption<PageRange>(
+        longName: PagesLongName,
+        shortName: "p",
+        description: "page number or page range (N or S-E -> 1 or 3-5)",
+        contextCaptureType: ContextCaptureType.OneOrMore,
+        isRequired: true)
+    ]
+    public List<PageRange> Pages { get; set; } = [];
 }

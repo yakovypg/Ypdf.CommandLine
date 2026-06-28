@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using NetArgumentParser.Options;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Configuration.Restrictions;
+using Ypdf.CommandLine.Configuration.Subcommands;
 
 namespace Ypdf.CommandLine.Creators;
 

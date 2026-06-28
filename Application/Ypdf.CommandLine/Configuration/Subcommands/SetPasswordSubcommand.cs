@@ -2,7 +2,7 @@ using iText.Kernel.Pdf;
 using NetArgumentParser.Attributes;
 using Ypdf.Core.Security;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
 internal sealed class SetPasswordSubcommand
 {

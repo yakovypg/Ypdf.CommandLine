@@ -1,15 +1,18 @@
+using System.Collections.Generic;
 using NetArgumentParser.Attributes;
+using NetArgumentParser.Options.Context;
+using Ypdf.Core.Design.Pages;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
-internal sealed class ExtractImagesSubcommand
+internal sealed class CropPagesSubcommand
 {
-    internal const string Name = "extract-images";
-    internal const string Description = "Extract images from the PDF document";
+    internal const string Name = "crop";
+    internal const string Description = "Crop PDF document pages";
 
     internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
     internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
-    internal const string MaxNumberOfImagesToExtractLongName = "limit";
+    internal const string PageCroppingsLongName = "cropping";
 
     [ValueOption<string>(
         longName: InputPathLongName,
@@ -24,19 +27,18 @@ internal sealed class ExtractImagesSubcommand
     [ValueOption<string>(
         longName: OutputPathLongName,
         shortName: "o",
-        description: "path to the output directory",
+        description: "path to the output file",
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
     public string OutputPath { get; set; } = string.Empty;
 
-    [ValueOption<int>(
-        defaultValue: 0,
-        longName: MaxNumberOfImagesToExtractLongName,
-        shortName: "l",
-        description: "maximum number of images that will be extracted. Zero indicates no limitation",
-        addDefaultValueToDescription: true,
-        valueRestriction: "min 0\n?maximum number of images must be non-negative")
+    [MultipleValueOption<PageCropping>(
+        longName: PageCroppingsLongName,
+        shortName: "c",
+        description: "page croppings (Pages:LowerLeftPoint,UpperRightPoint -> 1:(5,5),(40,60) or 1,3-5:(5,5),(40,60))",
+        contextCaptureType: ContextCaptureType.OneOrMore,
+        isRequired: true)
     ]
-    public int MaxNumberOfImagesToExtract { get; set; }
+    public List<PageCropping> PageCroppings { get; set; } = [];
 }

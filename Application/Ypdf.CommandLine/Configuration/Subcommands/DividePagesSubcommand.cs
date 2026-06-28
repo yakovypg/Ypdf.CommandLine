@@ -1,18 +1,18 @@
 using System.Collections.Generic;
 using NetArgumentParser.Attributes;
 using NetArgumentParser.Options.Context;
-using Ypdf.Core.Enumeration;
+using Ypdf.Core.Design.Pages;
 
-namespace Ypdf.CommandLine.Configuration;
+namespace Ypdf.CommandLine.Configuration.Subcommands;
 
-internal sealed class RemovePagesSubcommand
+internal sealed class DividePagesSubcommand
 {
-    internal const string Name = "remove-pages";
-    internal const string Description = "Remove pages from the PDF document";
+    internal const string Name = "divide";
+    internal const string Description = "Divide PDF document pages";
 
     internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
     internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
-    internal const string PagesLongName = "pages";
+    internal const string PageDivisionsLongName = "division";
 
     [ValueOption<string>(
         longName: InputPathLongName,
@@ -33,12 +33,12 @@ internal sealed class RemovePagesSubcommand
     [OptionGroup("paths", "", "")]
     public string OutputPath { get; set; } = string.Empty;
 
-    [MultipleValueOption<PageRange>(
-        longName: PagesLongName,
-        shortName: "p",
-        description: "page number or page range (N or S-E -> 1 or 3-5)",
+    [MultipleValueOption<PageDivision>(
+        longName: PageDivisionsLongName,
+        shortName: "d",
+        description: "page divisions (Pages:Orientation,CenterOffset -> 1:horizontal or 1,3-5:vertical,10)",
         contextCaptureType: ContextCaptureType.OneOrMore,
         isRequired: true)
     ]
-    public List<PageRange> Pages { get; set; } = [];
+    public List<PageDivision> PageDivisions { get; set; } = [];
 }
