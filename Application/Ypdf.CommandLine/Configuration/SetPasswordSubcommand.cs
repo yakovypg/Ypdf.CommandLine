@@ -95,6 +95,6 @@ internal sealed class SetPasswordSubcommand
             nameof(EncryptionConstants.ENCRYPTION_AES_256)
         ])
     ]
-    [OptionGroup("encryption", "Encryption", "Options for configuring encryption")]
+    [OptionGroup("passwords", "", "")]
     public EncryptionAlgorithm EncryptionAlgorithm { get; set; } = EncryptionAlgorithm.Parse(DefaultEncryptionAlgorithm);
 }

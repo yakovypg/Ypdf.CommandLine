@@ -41,7 +41,6 @@ internal sealed class SplitSubcommand
         description: "split parts represented by page number or page range (N or S-E -> 1 or 3-5)",
         contextCaptureType: ContextCaptureType.OneOrMore)
     ]
-    [OptionGroup("paging", "Paging", "Options for configuring paging")]
     public List<PageRange> SplitParts { get; set; } = [];
 
     [ValueOption<MathExpression>(
@@ -50,6 +49,5 @@ internal sealed class SplitSubcommand
         description: "expression that describes the size of each split part in bytes. " +
             "It can be either a number or a an expression (1024 or (1+3)*1024)")
     ]
-    [OptionGroup("paths", "", "")]
     public MathExpression? SplitPartSizeExpression { get; set; }
 }

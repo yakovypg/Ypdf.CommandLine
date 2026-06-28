@@ -40,6 +40,5 @@ internal sealed class DividePagesSubcommand
         contextCaptureType: ContextCaptureType.OneOrMore,
         isRequired: true)
     ]
-    [OptionGroup("appearance", "Appearance", "Options for configuring page appearance")]
     public List<PageDivision> PageDivisions { get; set; } = [];
 }

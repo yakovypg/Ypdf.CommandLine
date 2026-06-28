@@ -40,6 +40,5 @@ internal sealed class CropPagesSubcommand
         contextCaptureType: ContextCaptureType.OneOrMore,
         isRequired: true)
     ]
-    [OptionGroup("appearance", "Appearance", "Options for configuring page appearance")]
     public List<PageCropping> PageCroppings { get; set; } = [];
 }

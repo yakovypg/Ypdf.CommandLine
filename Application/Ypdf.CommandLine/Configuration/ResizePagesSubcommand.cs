@@ -40,6 +40,5 @@ internal sealed class ResizePagesSubcommand
         contextCaptureType: ContextCaptureType.OneOrMore,
         isRequired: true)
     ]
-    [OptionGroup("appearance", "Appearance", "Options for configuring page appearance")]
     public List<PageResizing> PageResizings { get; set; } = [];
 }

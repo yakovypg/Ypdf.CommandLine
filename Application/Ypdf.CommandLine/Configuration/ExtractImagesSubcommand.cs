@@ -38,6 +38,5 @@ internal sealed class ExtractImagesSubcommand
         addDefaultValueToDescription: true,
         valueRestriction: "min 0\n?maximum number of images must be non-negative")
     ]
-    [OptionGroup("extraction", "Extraction", "Options for configuring image extraction")]
     public int MaxNumberOfImagesToExtract { get; set; }
 }

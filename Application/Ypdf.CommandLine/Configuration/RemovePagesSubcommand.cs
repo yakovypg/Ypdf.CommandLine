@@ -40,6 +40,5 @@ internal sealed class RemovePagesSubcommand
         contextCaptureType: ContextCaptureType.OneOrMore,
         isRequired: true)
     ]
-    [OptionGroup("paging", "Paging", "Options for configuring paging")]
     public List<PageRange> Pages { get; set; } = [];
 }

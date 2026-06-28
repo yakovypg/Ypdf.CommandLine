@@ -47,7 +47,6 @@ internal sealed class ExtractTextSubcommand
             nameof(TextExtractors.LocationBased)
         ])
     ]
-    [OptionGroup("extraction", "Extraction", "Options for configuring text extraction")]
     public ITextExtractor TextExtractor { get; set; } = TextExtractors.Parse(DefaultTextExtractor);
 
     [FlagOption(
@@ -55,7 +54,6 @@ internal sealed class ExtractTextSubcommand
         shortName: "t",
         description: "use Tika for text extraction")
     ]
-    [OptionGroup("extraction", "", "")]
     public bool UseTika { get; set; }
 
     [ValueOption<string>(
@@ -64,6 +62,5 @@ internal sealed class ExtractTextSubcommand
         description: "path to the tika server .jar file",
         valueRestriction: "file jar\n?input path must point to a .jar file")
     ]
-    [OptionGroup("extraction", "", "")]
     public string TikaServerJarPath { get; set; } = string.Empty;
 }

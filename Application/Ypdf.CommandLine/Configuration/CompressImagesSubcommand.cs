@@ -47,7 +47,6 @@ internal sealed class CompressImagesSubcommand
         addDefaultValueToDescription: true,
         valueRestriction: "inrange 0 1\n?image quality factor must be in [0; 1]")
     ]
-    [OptionGroup("compression", "Compression", "Options for configuring compression")]
     public float QualityFactor { get; set; }
 
     [ValueOption<float>(
@@ -58,7 +57,6 @@ internal sealed class CompressImagesSubcommand
         addDefaultValueToDescription: true,
         valueRestriction: "inrange 0 1\n?image size factor must be in [0; 1]")
     ]
-    [OptionGroup("compression", "", "")]
     [MutuallyExclusiveOptionGroup(
         $"{nameof(CompressImagesSubcommand)}.{nameof(SizeFactor)}-{nameof(Width)}",
         $"{nameof(SizeFactor)}-{nameof(Width)}",
@@ -77,7 +75,6 @@ internal sealed class CompressImagesSubcommand
         description: "output image width",
         valueRestriction: "inrange 1 100000\n?output image with must be in [1; 100000]")
     ]
-    [OptionGroup("compression", "", "")]
     [MutuallyExclusiveOptionGroup($"{nameof(CompressImagesSubcommand)}.{nameof(SizeFactor)}-{nameof(Width)}", "", "")]
     public int? Width { get; set; }
 
@@ -87,7 +84,6 @@ internal sealed class CompressImagesSubcommand
         description: "output image height",
         valueRestriction: "inrange 1 100000\n?output image height must be in [1; 100000]")
     ]
-    [OptionGroup("compression", "", "")]
     [MutuallyExclusiveOptionGroup($"{nameof(CompressImagesSubcommand)}.{nameof(SizeFactor)}-{nameof(Height)}", "", "")]
     public int? Height { get; set; }
 
@@ -101,6 +97,5 @@ internal sealed class CompressImagesSubcommand
         addDefaultValueToDescription: true,
         addChoicesToDescription: true)
     ]
-    [OptionGroup("compression", "", "")]
     public string Extension { get; set; } = string.Empty;
 }

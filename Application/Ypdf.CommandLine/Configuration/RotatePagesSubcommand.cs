@@ -41,7 +41,6 @@ internal sealed class RotatePagesSubcommand
         description: "rotation angle in degrees",
         addDefaultValueToDescription: true)
     ]
-    [OptionGroup("appearance", "Appearance", "Options for configuring page appearance")]
     public int RotationAngleDegrees { get; set; }
 
     [MultipleValueOption<PageRotation>(
@@ -50,6 +49,5 @@ internal sealed class RotatePagesSubcommand
         description: "page rotations (Pages:Angle -> 1:-90 or 1,3-5:90)",
         contextCaptureType: ContextCaptureType.OneOrMore)
     ]
-    [OptionGroup("appearance", "", "")]
     public List<PageRotation> PageRotations { get; set; } = [];
 }

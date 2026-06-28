@@ -41,7 +41,6 @@ internal sealed class CompressSubcommand
         addDefaultValueToDescription: true,
         valueRestriction: "inrange 0 1\n?extracted image quality factor must be in [0; 1]")
     ]
-    [OptionGroup("compression", "Compression", "Options for configuring compression")]
     public float QualityFactor { get; set; }
 
     [ValueOption<float>(
@@ -52,7 +51,6 @@ internal sealed class CompressSubcommand
         addDefaultValueToDescription: true,
         valueRestriction: "inrange 0 1\n?extracted image size factor must be in [0; 1]")
     ]
-    [OptionGroup("compression", "", "")]
     public float SizeFactor { get; set; }
 
     [ValueOption<string>(
@@ -65,7 +63,6 @@ internal sealed class CompressSubcommand
         addDefaultValueToDescription: true,
         addChoicesToDescription: true)
     ]
-    [OptionGroup("compression", "", "")]
     public string Extension { get; set; } = string.Empty;
 
     [FlagOption(
@@ -73,6 +70,5 @@ internal sealed class CompressSubcommand
         shortName: "",
         description: "disable compression capability check")
     ]
-    [OptionGroup("compression", "", "")]
     public bool DisableCompressionCapabilityCheck { get; set; }
 }

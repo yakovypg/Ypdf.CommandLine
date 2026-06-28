@@ -41,7 +41,6 @@ internal sealed class RenderSubcommand
         description: "page number or page range (N or S-E -> 1 or 3-5)",
         contextCaptureType: ContextCaptureType.OneOrMore)
     ]
-    [OptionGroup("paging", "Paging", "Options for configuring paging")]
     public List<PageRange> Pages { get; set; } = [];
 
     [ValueOption<string>(
@@ -54,7 +53,6 @@ internal sealed class RenderSubcommand
         addDefaultValueToDescription: true,
         addChoicesToDescription: true)
     ]
-    [OptionGroup("rendering", "Rendering", "Options for configuring rendering")]
     public string Extension { get; set; } = string.Empty;
 
     [ValueOption<int>(
@@ -65,6 +63,5 @@ internal sealed class RenderSubcommand
         addDefaultValueToDescription: true,
         valueRestriction: "min 1\n?DPI must be >= 1")
     ]
-    [OptionGroup("rendering", "", "")]
     public int Dpi { get; set; }
 }

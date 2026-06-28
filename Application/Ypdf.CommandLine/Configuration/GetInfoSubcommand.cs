@@ -37,6 +37,5 @@ internal sealed class GetInfoSubcommand
         addDefaultValueToDescription: true,
         valueRestriction: "min 0\n?maximum number of page sizes must be non-negative")
     ]
-    [OptionGroup("limitations", "Limitations", "Options to configure print limitations")]
     public int MaxPageSizesToPrint { get; set; }
 }
