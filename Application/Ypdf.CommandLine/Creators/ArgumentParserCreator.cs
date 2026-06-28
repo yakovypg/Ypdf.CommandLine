@@ -27,7 +27,7 @@ internal sealed class ArgumentParserCreator : IArgumentParserCreator
             .GetEntryAssembly()?
             .GetName()
             .Version?
-            .ToString();
+            .ToString(fieldCount: 3);
 
         var parser = new ArgumentParser()
         {
