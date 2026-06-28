@@ -10,8 +10,8 @@ internal sealed class ResizePagesSubcommand
     internal const string Name = "resize";
     internal const string Description = "Resize PDF document pages";
 
-    internal const string InputPathLongName = "input";
-    internal const string OutputPathLongName = "output";
+    internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
+    internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
     internal const string PageResizingsLongName = "resizing";
 
     [ValueOption<string>(

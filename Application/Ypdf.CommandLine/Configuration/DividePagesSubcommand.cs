@@ -10,8 +10,8 @@ internal sealed class DividePagesSubcommand
     internal const string Name = "divide";
     internal const string Description = "Divide PDF document pages";
 
-    internal const string InputPathLongName = "input";
-    internal const string OutputPathLongName = "output";
+    internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
+    internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
     internal const string PageDivisionsLongName = "division";
 
     [ValueOption<string>(

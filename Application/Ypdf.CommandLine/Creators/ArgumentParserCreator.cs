@@ -6,6 +6,8 @@ using iText.Kernel.Geom;
 using NetArgumentParser;
 using NetArgumentParser.Converters;
 using NetArgumentParser.Generators;
+using NetArgumentParser.Options;
+using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Converters;
 using Ypdf.CommandLine.Exceptions;
 using Ypdf.Core.Design;
@@ -65,6 +67,41 @@ internal sealed class ArgumentParserCreator : IArgumentParserCreator
 
         parser.ChangeOutputWriter(outputWriter);
         parser.AddConverters(true, [.. converters]);
+
+        ConfigurePathOptions(parser);
+    }
+
+    private static void ConfigurePathOptions(ArgumentParser parser)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(parser, nameof(parser));
+
+        static bool IsPathOption(ICommonOption commonOption)
+        {
+            return commonOption?.LongName == StandardOptionNames.InputPathLongName ||
+                   commonOption?.LongName == StandardOptionNames.OutputPathLongName;
+        }
+
+        IEnumerable<ICommonOption> pathOptions = parser.FindOptions(IsPathOption, true);
+
+        foreach (ICommonOption pathOption in pathOptions)
+        {
+            if (pathOption is ValueOption<string> pathValueOption)
+                ConfigurePathOption(pathValueOption);
+            else if (pathOption is MultipleValueOption<string> pathMultipleValueOption)
+                ConfigurePathOption(pathMultipleValueOption);
+        }
+    }
+
+    private static void ConfigurePathOption(ValueOption<string> pathOption)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(pathOption, nameof(pathOption));
+        pathOption.Converter = new ValueConverter<string>(PathConverter.ToAbsolutePath);
+    }
+
+    private static void ConfigurePathOption(MultipleValueOption<string> pathOption)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(pathOption, nameof(pathOption));
+        pathOption.Converter = new MultipleValueConverter<string>(PathConverter.ToAbsolutePath);
     }
 
     private static ApplicationDescriptionGenerator CreateDescriptionGenerator(

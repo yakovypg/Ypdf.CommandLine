@@ -8,8 +8,8 @@ internal sealed class ExtractTextSubcommand
     internal const string Name = "extract-text";
     internal const string Description = "Extract text from the PDF document";
 
-    internal const string InputPathLongName = "input";
-    internal const string OutputPathLongName = "output";
+    internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
+    internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
     internal const string TextExtractorLongName = "text-extractor";
     internal const string UseTikaLongName = "use-tika";
     internal const string TikaServerJarPathLongName = "tika-jar";

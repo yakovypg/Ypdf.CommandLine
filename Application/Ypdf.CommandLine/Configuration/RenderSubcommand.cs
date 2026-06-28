@@ -10,8 +10,8 @@ internal sealed class RenderSubcommand
     internal const string Name = "render";
     internal const string Description = "Convert PDF document pages to images";
 
-    internal const string InputPathLongName = "input";
-    internal const string OutputPathLongName = "output";
+    internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
+    internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
     internal const string PagesLongName = "pages";
     internal const string ExtensionLongName = "extension";
     internal const string DpiLongName = "dpi";

@@ -7,8 +7,8 @@ internal sealed class ExtractImagesSubcommand
     internal const string Name = "extract-images";
     internal const string Description = "Extract images from the PDF document";
 
-    internal const string InputPathLongName = "input";
-    internal const string OutputPathLongName = "output";
+    internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
+    internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
     internal const string MaxNumberOfImagesToExtractLongName = "limit";
 
     [ValueOption<string>(

@@ -12,8 +12,8 @@ internal sealed class ImagesToPdfSubcommand
     internal const string Name = "image-to-pdf";
     internal const string Description = "Convert images to the PDF document";
 
-    internal const string InputPathLongName = "input";
-    internal const string OutputPathLongName = "output";
+    internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
+    internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
     internal const string MarginLongName = "margin";
     internal const string PageSizeLongName = "page-size";
     internal const string PageRotationAngleDegreesLongName = "angle";

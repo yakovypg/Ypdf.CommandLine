@@ -16,8 +16,8 @@ internal sealed class AddPageNumbersSubcommand
     internal const string Name = "add-page-numbers";
     internal const string Description = "Add page numbers to the PDF document";
 
-    internal const string InputPathLongName = "input";
-    internal const string OutputPathLongName = "output";
+    internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
+    internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
     internal const string HorizontalNumberAlignmentLongName = "horizontal-alignment";
     internal const string VerticalNumberLongName = "vertical-alignment";
     internal const string MarginLongName = "margin";

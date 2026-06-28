@@ -7,8 +7,8 @@ internal sealed class CompressSubcommand
     internal const string Name = "compress";
     internal const string Description = "Compress the PDF document";
 
-    internal const string InputPathLongName = "input";
-    internal const string OutputPathLongName = "output";
+    internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
+    internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
     internal const string QualityFactorLongName = "quality";
     internal const string SizeFactorLongName = "size";
     internal const string ExtensionLongName = "extension";

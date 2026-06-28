@@ -15,8 +15,8 @@ internal sealed class AddWatermarkAnnotationSubcommand
     internal const string Name = "add-watermark-annotation";
     internal const string Description = "Add watermark annotation to the PDF document";
 
-    internal const string InputPathLongName = "input";
-    internal const string OutputPathLongName = "output";
+    internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
+    internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
     internal const string PagesLongName = "pages";
     internal const string TextLongName = "text";
     internal const string RotationAngleDegreesLongName = "angle";

@@ -11,8 +11,8 @@ internal sealed class SplitSubcommand
     internal const string Name = "split";
     internal const string Description = "Split the PDF document";
 
-    internal const string InputPathLongName = "input";
-    internal const string OutputPathLongName = "output";
+    internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
+    internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
     internal const string SplitPartsLongName = "parts";
     internal const string SplitPartSizeExpressionLongName = "part-size";
 

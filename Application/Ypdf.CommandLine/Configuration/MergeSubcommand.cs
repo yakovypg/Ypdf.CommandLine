@@ -9,8 +9,8 @@ internal sealed class MergeSubcommand
     internal const string Name = "merge";
     internal const string Description = "Merge PDF documents";
 
-    internal const string InputPathLongName = "input";
-    internal const string OutputPathLongName = "output";
+    internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
+    internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
 
     [MultipleValueOption<string>(
         longName: InputPathLongName,

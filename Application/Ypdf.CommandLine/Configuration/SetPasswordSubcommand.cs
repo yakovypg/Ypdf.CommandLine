@@ -9,8 +9,8 @@ internal sealed class SetPasswordSubcommand
     internal const string Name = "set-password";
     internal const string Description = "Set password to the PDF document";
 
-    internal const string InputPathLongName = "input";
-    internal const string OutputPathLongName = "output";
+    internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
+    internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
     internal const string CommonPasswordLongName = "password";
     internal const string UserPasswordLongName = "user-password";
     internal const string OwnerPasswordLongName = "owner-password";

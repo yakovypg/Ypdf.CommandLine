@@ -14,8 +14,8 @@ internal sealed class TextToPdfSubcommand
     internal const string Name = "text-to-pdf";
     internal const string Description = "Convert text to the PDF document";
 
-    internal const string InputPathLongName = "input";
-    internal const string OutputPathLongName = "output";
+    internal const string InputPathLongName = StandardOptionNames.InputPathLongName;
+    internal const string OutputPathLongName = StandardOptionNames.OutputPathLongName;
     internal const string MarginLongName = "margin";
     internal const string PageSizeLongName = "page-size";
     internal const string TextAlignmentLongName = "text-alignment";
